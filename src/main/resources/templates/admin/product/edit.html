@@ -1,0 +1,70 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Prodduct', ~{this :: div})}">
+
+<head>
+	<title>Product</title>
+</head>
+
+<body>
+	<div class="content-wrapper" style="height: 1000px;">
+		<section class="content">
+          <div class="card-header">
+            <h3 class="card-title">Form Edit</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form method="post" th:action="@{/admin/product/edit}" enctype="multipart/form-data">
+            <div class="card-body">
+              <div class="form-group">
+                <label>Name Product</label>
+                <input type="text" class="form-control"  th:field="${product.name}">
+              </div>
+              <div class="form-group">
+                <label>Price ($)</label>
+                <input type="text" class="form-control"  th:field="${product.price}">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputFile">Minimumquantity</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Minimumquantity" th:field="${product.minimumquantity}">
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleInputFile">Profit</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Profit" th:field="${product.profit}">
+              </div>
+  				<!-- textarea -->
+				  <div class="form-group">
+				    <label>Decription</label>
+				    <textarea class="form-control" rows="3"  th:field="${product.description}"></textarea>
+				  </div>
+				  <div class="form-group">
+					  <label for="exampleInputFile">Image Last</label>
+					  <div class="input-group">
+					      <img th:src="@{'/images/' + ${product.picture}}" width="90" height="90">
+					  </div>
+					</div>
+				  <div class="form-group">
+					  <label for="exampleInputFile">File Image</label>
+					  <div class="input-group">
+					    <div class="custom-file">
+					      <input type="file" class="custom-file-input" name="file" id="exampleInputFile">
+					      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+					    </div>
+					  </div>
+					</div>
+				 <div class="form-group">
+				    <label>Category</label>
+				    <select class="form-control" th:field="${product.category.id}">
+					  <option th:value="${product.category.id}" th:text="${product.category.name}"></option>
+				      <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+				    </select>
+			   	</div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <input type="hidden" class="form-control"  th:field="${product.id}">
+            </div>
+          </form>
+		</section>
+	</div>
+</html>

@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('', ~{this :: div})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+	
+	<div class="content-wrapper">
+		
+		
+		
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>List Account</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">DataTable with minimal features & hover style</h3>
+								<div class="form-seach">
+									<form method="get" th:action="@{/superadmin/home/searchByKeyword}">
+										<div class="input-group input-group-sm">
+											<input class="form-control form-control-navbar" type="search" name="keyword" placeholder="Search"
+												aria-label="Search">
+											<div class="input-group-append">
+												<button class="badge badge-secondary" type="submit">Search</button>												
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<table id="example2" class="table table-bordered table-hover">
+									<thead>
+										<th>Id</th>
+										<th>Username</th>
+										<th>Photo</th>
+										<th>Fullname</th>
+										<th>Email</th>
+										<th>Status</th>
+										<th>Roles</th>
+									</thead>
+									<tbody>
+										
+										<tr th:each="account : ${accounts}">
+											<td th:text="${account.id}" id="accountId"></td>
+											<td><a th:href="@{'/superadmin/home/details/' + ${account.id}}"  th:text="${account.username}"></a></td>											
+											</td>
+											<td>
+												<img th:src="@{'/images/' + ${account.photo}}" width="70"
+													height="100" />
+											</td>
+											<td th:text="${account.fullname}"></td>
+											<td th:text="${account.email}"></td>
+											<td class="project-state">
+												<span class="badge badge-success" th:text="${account.status} ? 'On' : 'Off'" th:data-id="${account.id}" id="clickStatus"></span>												  
+											</td>
+											<td valign="top">
+												<ul>
+													<li th:each="role : ${account.role}" th:text="${role.name}"></li>
+												</ul>
+											</td>
+										</tr>
+										
+									</tbody>
+
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Customer', ~{this :: div})}">
+
+<head>
+	<title>Customer</title>
+	<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+	
+</head>
+
+<body>
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>List Customer</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">DataTable with minimal features &
+									hover style</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<table id="example2" class="table table-bordered table-hover">
+									<thead>
+										<th>ID</th>
+										<th>Fullname</th>
+										<th>Adress</th>
+										<th>Phone</th>
+										<th>Email</th>
+										<th>Action</th>
+									</thead>
+									<tbody>
+										<tr th:each="customer : ${customers}">
+											<td th:text="${customer.id}"></td>
+											<td><a th:href="@{'/employee/customer/detail/' + ${customer.id}}"  th:text="${customer.name}"></a></td>											
+											<td th:text="${customer.address}"></td>
+											<td th:text="${customer.phone}"></td>
+											<td th:text="${customer.email}"></td>
+											<td>
+												<a th:href="@{'/employee/customer/edit/' + ${customer.id}}">Edit</a>
+												<a th:href="@{'/employee/customer/delete/' + ${customer.id}}" onclick="return confirm('Are you Sure?')">Delete</a>
+											</td>
+										</tr>
+
+									</tbody>
+
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+
+</body>
+
+</html>

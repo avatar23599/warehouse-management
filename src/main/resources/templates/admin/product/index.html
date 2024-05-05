@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Prodduct', ~{this :: div})}">
+
+<head>
+	<title>Product</title>
+</head>
+
+<body>
+<div class="content-wrapper" style="height: 1020px;">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">DataTable with minimal features & hover style</h3>
+						<div class="form-seach">
+						<form method="get" th:action="@{/admin/product/searchByKeyword}">
+										<div class="input-group input-group-sm">
+											<input class="form-control form-control-navbar" type="search" name="keyword" placeholder="Search"
+												aria-label="Search">
+											<div class="input-group-append">
+												<button class="badge badge-secondary" type="submit">Search</button>												
+											</div>
+										</div>
+									</form>
+								</div>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<table id="example2" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Image</th>
+									<th>Name</th>
+									<th>Price($)</th>
+									<th>Quantity</th>
+									<th>Minimum Quantity</th>
+									<th>Stock</th>
+									<th>Category</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="product : ${products}">
+									<td><img th:src="@{'/images/' + ${product.picture}}" width="90" height="90"></td>
+									<td><a th:href="@{'/admin/product/detail/' + ${product.id}}"  th:text="${product.name}"></a></td>
+									<td th:text="${product.price}"></td>
+									<td th:text="${product.quantity}"></td>
+									<td th:text="${product.minimumquantity}"></td>
+									<td>
+									    <a th:if="${product.quantity - product.minimumquantity < 0}" class="btn btn-danger" th:href="@{'/admin/suplier/detail/' + ${product.suplier.id}}" >Out of stock</a>
+									    <a th:if="${product.quantity - product.minimumquantity >= 0 and product.quantity - product.minimumquantity <= 5}" class="btn btn-warning">Nearly out of stock</a>
+									    <a th:if="${product.quantity - product.minimumquantity > 5}" class="btn btn-success">In stock</a>
+									</td>
+									<td th:text="${product.category.name}"></td>
+									<td>
+										<a th:href="@{'/admin/product/edit/' + ${product.id}}">Edit | </a>
+										<a th:href="@{'/admin/product/delete/' + ${product.id}}" onclick="return confirm('Are you Sure?')">Delete | </a>
+										
+									</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>Image</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Decription</th>
+									<th>Category</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+</div>
+</html>

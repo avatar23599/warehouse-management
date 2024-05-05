@@ -1,0 +1,78 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Suplier', ~{this :: div})}">
+
+<head>
+	<title>Suplier</title>
+</head>
+
+<body>
+<div class="content-wrapper">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">DataTable with minimal features & hover style</h3>
+						<div class="form-seach">
+									<form method="get" th:action="@{/admin/suplier/searchByKeyword}">
+										<div class="input-group input-group-sm">
+											<input class="form-control form-control-navbar" type="search" name="keyword" placeholder="Search"
+												aria-label="Search">
+											<div class="input-group-append">
+												<button class="badge badge-secondary" type="submit">Search</button>												
+											</div>
+										</div>
+									</form>
+								</div>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<table id="example2" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Address</th>
+									<th>Phone</th>
+									<th>Email</th>
+									<th>MoreInfor</th>
+									<th>ContactDate</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="suplier : ${supliers}">
+									<td><a th:href="@{'/admin/suplier/detail/' + ${suplier.id}}"  th:text="${suplier.name}"></a></td>
+									<td th:text="${suplier.address}"></td>
+									<td th:text="${suplier.phone}"></td>
+									<td th:text="${suplier.email}"></td>
+									<td th:text="${suplier.moreinfor}"></td>
+									<td th:text="${suplier.contactdate}"></td>
+									
+									<td>
+										<a th:href="@{'/admin/suplier/edit/' + ${suplier.id}}">Edit</a>
+										<a th:href="@{'/admin/suplier/delete/' + ${suplier.id}}" onclick="return confirm('Are you Sure?')">Delete</a>
+									</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>Name</th>
+									<th>Address</th>
+									<th>Phone</th>
+									<th>Email</th>
+									<th>MoreInfor</th>
+									<th>ContactDate</th>
+									<td>Action</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+</div>
+</html>

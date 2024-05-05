@@ -1,0 +1,182 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('', ~{this :: div})}">
+
+<head>
+	<title>Detalis</title>
+	
+</head>
+
+<body>
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>Profile</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-3">
+
+						<!-- Profile Image -->
+						<div class="card card-primary card-outline">
+							<div class="card-body box-profile">
+
+								<h3 class="profile-username text-center" th:text="${customer.name}"></h3>
+<!--
+								<p class="text-muted text-center" th:text="${#dates.format(customer.dob, 'dd/MM/yyyy')}">-->
+								</p>
+
+								<ul class="list-group list-group-unbordered mb-3">
+									<li class="list-group-item">
+										<b>ID</b> <a class="float-right" th:text="${customer.id}"></a>
+									</li>
+									<li class="list-group-item">
+										<b>FullName</b> <a class="float-right" th:text="${customer.name}"></a>
+									</li>
+									
+								</ul>
+
+								<a th:href="@{'/employee/customer/delete/' + ${customer.id}}" onclick="return confirm('Are you sure?')" 
+										class="btn btn-primary btn-block btn-red"><b>Delete</b></a>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+
+						<!-- About Me Box -->
+
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+					<div class="col-md-9">
+						<div class="card">
+							<div class="card-header p-2">
+								<ul class="nav nav-pills">
+									<li class="nav-item"><a class="nav-link active" href="#activity"
+											data-toggle="tab">Activity</a></li>
+
+									<li class="nav-item"><a class="nav-link" href="#settings"
+											data-toggle="tab">Settings</a></li>
+								</ul>
+							</div><!-- /.card-header -->
+							<div class="card-body">
+								<div class="tab-content">
+									<div class="active tab-pane" id="activity">
+										
+											<!--											-->
+											<!-- /.user-block -->
+											<!-- /.card-header -->
+											<div class="card-body">
+												<strong><i class="fas fa-book mr-1"></i> Email</strong>
+
+												<p class="text-muted" th:text="${customer.email}"></p>
+
+												<hr>
+
+												<strong><i class="fas fa-map-marker-alt mr-1"></i> Address</strong>
+
+												<p class="text-muted" th:text="${customer.address}"></p>
+
+												<hr>
+
+												<strong><i class="fas fa-phone-alt mr-1"></i> Phone</strong>
+
+												<p class="text-muted" th:text="${customer.phone}"></p>
+
+												<hr>
+											</div>
+											<!-- /.card-body -->
+										
+										<!-- /.post -->
+									</div>
+									<!-- /.tab-pane -->
+
+									<!-- /.tab-pane -->
+
+
+									<div class="tab-pane" id="settings">
+										<form class="form-horizontal" th:action="@{/admin/customer/edit}" method="post" enctype="multipart/form-data">
+											<div class="form-group row">
+												<label for="inputName" class="col-sm-2 col-form-label">FullName</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Full Name"
+														name="fullname" th:field="${customer.name}" required>
+												</div>
+											</div>
+									
+											
+											<div class="form-group row">
+												<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Email" name="email"
+																th:field="${customer.email}" required>
+												</div>
+											</div>
+											
+											<div class="form-group row">
+												<label for="inputEmail" class="col-sm-2 col-form-label">Phone</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Phone" name="phone"
+															th:field="${customer.phone}" required>
+												</div>
+											</div>
+											
+											<div class="form-group row">
+												<label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Address" name="Address"
+															th:field="${customer.address}" required>
+												</div>
+											</div>
+											<!--<div class="form-group row">
+												<label for="inputEmail" class="col-sm-2 col-form-label">Dob</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" th:field="${customer.dob}" id="datepicker">
+												</div>
+											</div>-->
+
+											
+											<div class="form-group row">
+												<div class="offset-sm-2 col-sm-10">
+													<div class="checkbox">
+														<label>
+															<input type="checkbox"> I agree to the <a href="#">terms
+																and conditions</a>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group row">
+												<div class="offset-sm-2 col-sm-10">
+													<button type="submit" class="btn btn-danger">Submit</button>
+													<input type="hidden" th:field="${customer.id}">
+												</div>
+											</div>
+										</form>
+									</div>
+									<!-- /.tab-pane -->
+								</div>
+								<!-- /.tab-content -->
+							</div><!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+
+</body>
+
+</html>

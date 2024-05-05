@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Suplier', ~{this :: div})}">
+
+<head>
+	<title>Detail Suplier</title>
+</head>
+
+<body>
+	<h2>Suplier Detail</h2>
+    
+    
+    <div class="content-wrapper">
+	<div class="container-fluid">
+		
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					
+					<div class="card-header">
+						<h3 class="card-title"><a th:href="@{/admin/cart/index}">Go to Cart</a> |
+							<span style="color: greenyellow;" th:text="${msg}"></span></h3>
+					</div>
+					<!-- /.card-header -->
+					
+					<div class="card-body">
+						<p><strong>Name:</strong> <span font-size:"50px" th:text="${suplier.name}"></span> </p>
+					        <p><strong>Address:</strong> <span th:text="${suplier.address}"></span> </p>
+					        <p><strong>Phone:</strong> <span th:text="${suplier.phone}"></span></p>
+					        <br/>
+					        <h2>Products from this Supplier</h2>
+						<table id="example2" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Picture</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="product : ${products}">
+									<td>
+										<img th:src="@{'/images/' + ${product.picture}}" class="product-image" alt="Product Image"
+											style="width: 100px; height: auto;">
+									</td>
+									<td th:text="${product.name}"></td>
+									<td th:text="${product.price}"></td> 
+									<td><a th:href="@{'/admin/cart/addtocart/' + ${product.id}}">Add to Cart</a></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>Picture</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Action</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+</div>
+
+
+</html>

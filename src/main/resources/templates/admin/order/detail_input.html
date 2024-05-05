@@ -1,0 +1,83 @@
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{layout/layoutadmin :: content('Prodduct', ~{this :: div})}">
+
+<head>
+	<title>Product</title>
+</head>
+
+<body>
+<div class="content-wrapper">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<form method="post" th:action="@{/admin/order/inputinfo}">
+					<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">Detail Input</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<div class="card-body">
+					<div class="form-group">
+						<table class="table">
+							<tr>
+								<th><label>Requester: </label></th>
+								<td th:text="${account.username}"></td>
+							</tr>
+							<tr>
+								<th><label>Shipping address: </label></th>
+								<td th:text="${account.address}"></td>
+							</tr>
+							<tr>
+								<th><label>Phone: </label></th>
+								<td th:text="${account.phone}"></td>
+							</tr>
+							<tr>
+								<th><label>Suplier: </label></th>
+								<td th:text="${suplier.name}"></td>
+							</tr>
+							<tr>
+								<th><label>Date: </label></th>
+								<td th:text="${input.date}"></td>
+							</tr>
+						</table>
+						<br><br>
+					</div>
+						<table id="example2" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Id_Product</th>
+									<th>Name Product</th>
+									<th>Input Quantity</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="inputinfoDTO : ${inputinfoDTOs}">
+									<td th:text="${inputinfoDTO.product.id}"></td>
+									<td th:text="${inputinfoDTO.product.name}"></td>
+									<td th:text="${inputinfoDTO.count}"></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th colspan="2">Total Quantity</th>
+									<td style="text-align: left;" th:text="${total} "></td>
+								</tr>
+								<tr>
+									<th colspan="2">Status</th>
+									<td style="text-align: left;" th:text="${input.status} "></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				</form>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+</div>
+</html>

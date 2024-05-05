@@ -1,0 +1,254 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('', ~{this :: div})}">
+
+<head>
+	<title>Detalis</title>
+	
+</head>
+
+<body>
+	
+	<div class="content-wrapper" style="height: 800px;" >
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-3">
+
+						<!-- Profile Image -->
+						<div class="card card-primary card-outline">
+							<div class="card-body box-profile">
+								<div class="text-center">
+									<img  class="profile-user-img img-fluid img-circle" th:src="@{'/images/' + ${account.photo}}"
+										alt="User profile picture">
+								</div>
+
+								<h3 class="profile-username text-center" th:text="${account.username}"></h3>
+
+								<p class="text-muted text-center" th:text="${#dates.format(account.dob, 'dd/MM/yyyy')}">
+								</p>
+
+								<ul class="list-group list-group-unbordered mb-3">
+									<li class="list-group-item">
+										<b>ID</b> <a class="float-right" th:text="${account.id}"></a>
+									</li>
+									<li class="list-group-item">
+										<b>FullName</b> <a class="float-right" th:text="${account.fullname}"></a>
+									</li>
+									<li class="list-group-item">
+										<b>Roles</b> <a class="float-right" th:each="role : ${account.role}"
+											th:text="${role.name}"></a>
+									</li>
+								</ul>
+
+								<a th:href="@{'/superadmin/home/delete/' + ${account.id}}" onclick="return confirm('Are you sure?')" 
+										class="btn btn-primary btn-block btn-red"><b>Delete</b></a>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+
+						<!-- About Me Box -->
+
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+					<div class="col-md-9">
+						<div class="card">
+							<div class="card-header p-2">
+								<ul class="nav nav-pills">
+									<li class="nav-item"><a class="nav-link active" href="#activity"
+											data-toggle="tab">Profile</a></li>
+
+									<li class="nav-item"><a class="nav-link" href="#settings"
+											data-toggle="tab">Settings</a></li>
+								</ul>
+							</div><!-- /.card-header -->
+							<div class="card-body">
+								<div class="tab-content">
+									<div class="active tab-pane" id="activity">
+										<!-- Post -->
+										<div class="post">
+											<!--											-->
+											<!-- /.user-block -->
+											<!-- /.card-header -->
+											<div class="card-body">
+												<strong><i class="fas fa-book mr-1"></i> Email</strong>
+
+												<p class="text-muted" th:text="${account.email}"></p>
+
+												<hr>
+
+												<strong><i class="fas fa-map-marker-alt mr-1"></i> Address</strong>
+
+												<p class="text-muted" th:text="${account.address}"></p>
+
+												<hr>
+
+												<strong><i class="fas fa-phone-alt mr-1"></i> Phone</strong>
+
+												<p class="text-muted" th:text="${account.phone}"></p>
+
+												<hr>
+
+												<strong><i class="fa fa-mars-double"></i> Gender</strong>
+
+												<p class="text-muted">												
+													<span class="badge badge-success" th:text="${account.gender}? 'male' : 'female'"></span>
+												</p>
+												
+												<hr>
+
+												<strong><i class="fas fa-toggle-on"></i> Status</strong>
+
+												<p class="project-state">												
+													<span class="badge badge-success" th:text="${account.status}? 'On' : 'Off'"></span>
+												</p>
+											</div>
+											<!-- /.card-body -->
+										</div>
+										<!-- /.post -->
+									</div>
+									<!-- /.tab-pane -->
+
+									<!-- /.tab-pane -->
+
+									
+									<div class="tab-pane" id="settings">
+										<form class="form-horizontal" th:action="@{/superadmin/home/edit}" method="post" enctype="multipart/form-data">
+											<div class="form-group row">
+												<label for="inputName" class="col-sm-2 col-form-label">FullName</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Full Name"
+														name="fullname" th:field="${account.fullname}" required>
+												</div>
+											</div>
+									
+											<div class="form-group row">
+												<label for="inputName2" class="col-sm-2 col-form-label">Username</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Username" name="username" th:field="${account.username}"
+														required>
+												</div>
+											</div>
+											
+											<div class="form-group row">
+												<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+												<div class="col-sm-10">
+													<div class="input-group">
+														<input type="password" class="form-control" id="password" placeholder="Password" name="password">
+														<div class="input-group-append">
+															<button class="btn btn-outline-secondary" type="button" id="togglePassword">
+																<i class="fa fa-eye" aria-hidden="true"></i>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="form-group row">
+												<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Email" name="email"
+																th:field="${account.email}" required>
+												</div>
+											</div>
+											
+											<div class="form-group row">
+												<label for="inputEmail" class="col-sm-2 col-form-label">Phone</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Phone" name="phone"
+															th:field="${account.phone}" required>
+												</div>
+											</div>
+											
+											<div class="form-group row">
+												<label for="inputEmail" class="col-sm-2 col-form-label">Dob</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" th:value="${#dates.format(account.dob, 'dd/MM/yyyy')}" name="dob" id="datepicker">
+												</div>
+											</div>
+											
+											
+											<div class="form-group row">
+												<label for="inputEmail" class="col-sm-2 col-form-label">File</label>
+												<div class="col-sm-10 custom-file">
+													<input type="file" class="custom-file-input" id="customFile" name="file">
+													<label class="custom-file-label" for="customFile">Choose file</label>
+												</div>
+											</div>
+											
+											
+											<div class="form-group row">
+												<label for="inputExperience"
+													class="col-sm-2 col-form-label">Address</label>
+												<div class="col-sm-10">
+													<textarea class="form-control" placeholder="Address" name="address"
+														th:field="${account.address}" required></textarea>
+												</div>
+											</div>
+											
+											
+											<div class="form-group row">
+												<label for="inputExperience"
+													class="col-sm-2 col-form-label">Roles</label>
+												<div class="col-sm-10">	
+													<select th:field="${account.role.id}" class="custom-select form-control">
+														<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+													</select>
+												</div>
+											</div>
+											
+	<!--											<div class="form-group row">-->
+	<!--												<label for="inputEmail" class="col-sm-2 col-form-label">SecurityCode</label>-->
+	<!--												<div class="col-sm-10">-->
+	<!--													<input type="text" class="form-control" placeholder="securityCode" name="securityCode"-->
+	<!--															th:field="${account.securityCode}">-->
+	<!--												</div>-->
+	<!--											</div>-->
+											
+											<div class="form-group row">
+												<label for="inputSkills" class="col-sm-2 col-form-label">Status</label>
+												<div class="col-sm-10">
+													<input class="form-check-input" type="checkbox" name="status" id="status" th:field="${account.status}">
+												</div>
+											</div>
+											
+											<div class="form-group row">
+												<label for="inputSkills" class="col-sm-2 col-form-label">Gender</label>
+												<div class="col-sm-10">
+													<input type="radio" id="male" name="gender" value="true" th:field="${account.gender}">
+													<label for="male">Male</label><br>
+													<input type="radio" id="female" name="gender" value="false" th:field="${account.gender}">
+													<label for="female">Female</label><br>
+												</div>
+											</div>
+											
+											
+											<div class="form-group row">
+												<div class="offset-sm-2 col-sm-10">
+													<button type="submit" class="btn btn-danger">Submit</button>
+													<input type="hidden" th:field="${account.id}">
+													<input type="hidden" th:field="${account.photo}">
+													<input type="hidden" name="securityCode" th:field="${account.securityCode}">
+												</div>
+											</div>
+										</form>
+									</div>
+									
+									<!-- /.tab-pane -->
+								</div>
+								<!-- /.tab-content -->
+							</div><!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</section>
+	<!-- /.content -->
+	</div>
+
+</body>
+
+</html>

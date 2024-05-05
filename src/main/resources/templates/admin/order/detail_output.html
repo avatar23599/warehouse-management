@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{layout/layoutadmin :: content('Prodduct', ~{this :: div})}">
+
+<head>
+	<title>Product</title>
+</head>
+
+<body>
+<div class="content-wrapper">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+					<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">Detail Output
+						</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<div class="card-body">
+					<div class="form-group">
+						<table class="table">
+							<tr>
+								<th><label>Customer: </label></th>
+								<td th:text="${customer.name}"></td>
+							</tr>
+							<tr>
+								<th><label>Shipping address: </label></th>
+								<td th:text="${customer.address}"></td>
+							</tr>
+							<tr>
+								<th><label>Phone: </label></th>
+								<td th:text="${customer.phone}"></td>
+							</tr>
+							<tr>
+								<th><label>Requester: </label></th>
+								<td th:text="${account.username}"></td>
+							</tr>
+							<tr>
+								<th><label>Date: </label></th>
+								<td th:text="${output.date}"></td>
+							</tr>
+						</table>
+						<br><br>
+					</div>
+						<table id="example2" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Id_Product</th>
+									<th>Name Product</th>
+									<th>Input Quantity</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="outputInfo : ${outputInfos}">
+									<td th:text="${outputInfo.product.id}"></td>
+									<td th:text="${outputInfo.product.name}"></td>
+									<td th:text="${outputInfo.count}"></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th colspan="2">Total Quantity</th>
+									<td style="text-align: left;" th:text="${total} "></td>
+								</tr>
+								<tr>
+									<th colspan="2">Status</th>
+									<td style="text-align: left;" th:text="${output.status} "></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+</div>
+</html>

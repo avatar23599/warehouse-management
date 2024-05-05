@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Product', ~{this :: div})}">
+
+<head>
+	<title>Product</title>
+	<script th:src="@{/assets/admin/js/jquery-3.7.1.min.js}"></script>
+	<script>
+		$(document).ready(function () {
+			$('#quantity').keyup(function () {
+				var quantity = $('#quantity').val();
+				alert(quantity);
+				$.ajax({
+					type: 'GET',
+					data: {
+						quantity: quantity
+					},
+					url: 'admin/ajax/calculate',
+					success: function (quantity) {
+						$('#order_price').html(quantity);
+					}
+				});
+			});
+
+
+		});
+
+	</script>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<section class="content">
+			<div class="card-header">
+				<h3 class="card-title"> Form Output</h3>
+			</div>
+			
+			<!-- /.card-header -->
+			<!-- form start -->
+			<form method="post" th:action="@{/admin/cart/upload_output}" enctype="multipart/form-data">
+				<div class="card-body">
+					<div class="form-group">
+						<table class="table">
+							<tr>
+								<th><label>Sender: </label></th>
+								<td th:text="${account.username}"></td>
+							</tr>
+							<tr>
+								<th><label>Shipping address: </label></th>
+								<td th:text="${account.address}"></td>
+							</tr>
+							<tr>
+								<th><label>Phone: </label></th>
+								<td th:text="${account.phone}"></td>
+							</tr>
+							<tr>
+								<th><label>Customer: </label></th>
+								<td>
+									<select class="form-control" name="customer_id">
+				     				 <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
+								</td>
+							</tr>
+						</table>
+						
+					</div>
+					<div class="form-group">
+						<div class="form-group">
+							<label for="exampleInputFile">File Excel</label>
+							<div class="input-group">
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" name="excelFile" accept=".xls,.xlsx"
+										id="exampleInputFile">
+									<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+			</form>
+		</section>
+	</div>
+
+</html>

@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Category', ~{this :: div})}">
+
+<head>
+	<title>Category</title>
+</head>
+
+<body>
+<div class="content-wrapper">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">DataTable with minimal features & hover style</h3>
+						<div class="form-seach">
+									<form method="get" th:action="@{/admin/category/searchByKeyword}">
+										<div class="input-group input-group-sm">
+											<input class="form-control form-control-navbar" type="search" name="keyword" placeholder="Search"
+												aria-label="Search">
+											<div class="input-group-append">
+												<button class="badge badge-secondary" type="submit">Search</button>												
+											</div>
+										</div>
+									</form>
+								</div>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<table id="example2" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Parent</th>
+									<th>Edit</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="category : ${categories}">
+									<td th:text="${category.name}"></td>
+									<td  th:value="${category.category}" th:text="${category.category.id}"></td>
+									
+									
+									<td>
+										<a th:href="@{'/admin/category/edit/' + ${category.id}}">Edit</a>
+										<a th:href="@{'/admin/category/delete/' + ${category.id}}" onclick="return confirm('Are you Sure?')">Delete</a>
+									</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>Name</th>
+									<th>Parent</th>
+									<td>Edit</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+</div>
+</html>

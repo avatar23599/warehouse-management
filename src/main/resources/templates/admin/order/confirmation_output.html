@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{layout/layoutadmin :: content('Prodduct', ~{this :: div})}">
+
+<head>
+	<title>Product</title>
+</head>
+
+<body>
+<div class="content-wrapper">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">Coufirmmation Ouput</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<table id="example2" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Id_Output</th>
+									<th>Account</th>
+									<th>Customer</th>
+									<th>Date</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="output : ${ouputs}">
+									<td th:text="${output.id}"></td>
+									<td th:text="${output.account.username}"></td>
+									<td th:text="${output.customer.name}"></td>
+									<td th:text="${output.date}"></td>
+									<td th:text="${output.status}"></td>
+									<td>
+										<a th:href="@{'/admin/order/accept_comfirm/' + ${output.id}}">accept</a>
+									</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>Id_Output</th>
+									<th>Account</th>
+									<th>Customer</th>
+									<th>Date</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+</div>
+</html>

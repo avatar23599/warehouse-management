@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Prodduct', ~{this :: div})}">
+
+<head>
+	<title>Detail Product </title>
+</head>
+
+<body>
+<div class="content-wrapper" style="height: 800px;">
+	<div class="container-fluid">
+	<section class="content">
+  <!-- Default box -->
+  <div class="card card-solid">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <h3 class="d-inline-block d-sm-none" th:text="${product.name}"></h3>
+          <div class="col-12">
+            <img th:src="@{'/images/' + ${product.picture}}" class="product-image" alt="Product Image">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <h3 class="my-3" th:text="${product.name}"></h3>
+          <p><span th:text="${product.description}"></span><span style="color: white;">$</span></p>
+
+          <hr>
+          
+          <div class="bg-gray py-2 px-3 mt-4">
+            <h2 class="mb-0" th:text="${product.price}">
+            </h2>
+          </div>
+          
+<!--          <div class="mt-4">-->
+<!--            <div class="btn btn-default btn-lg btn-flat">-->
+<!--              <i class="fas fa-heart fa-lg mr-2"></i>-->
+<!--              <a th:href="@{'/admin/order/output/' + ${product.id}}">Go to Order</a>-->
+<!--            </div>-->
+<!--          </div>-->
+
+         	
+        </div>
+      </div>
+      <div class="row mt-4">
+        <nav class="w-100">
+          <div class="nav nav-tabs" id="product-tab" role="tablist">
+            <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
+           
+          </div>
+        </nav>
+        <div class="tab-content p-3" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab" th:text="${product.description}"> </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+
+</section>
+	</div>
+</div>
+</html>

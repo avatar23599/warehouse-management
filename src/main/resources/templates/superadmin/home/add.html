@@ -1,0 +1,125 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('', ~{this :: div})}">
+
+<head>
+	<title>Add</title>
+</head>
+
+<body>
+	
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="card-header">
+                <h3 class="card-title">Add Account</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form th:action="@{/superadmin/home/add}" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Full Name" name="fullname" required>
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-user"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Username" name="username"required>
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-user"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<input type="password" class="form-control" placeholder="Password" name="password" required>
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-lock"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Email" name="email" required>
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-envelope"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="customFile" name="file" required>
+							<label class="custom-file-label" for="customFile">Choose file</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Address" name="address" required>
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-map-marker-alt"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Phone" name="phone" required>
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-phone"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Date" name="dob" id="datepicker">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-calendar-alt"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<select th:field="${account.role.id}" class="custom-select form-control" required>
+							<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>Gender:</label><br>
+						<input type="radio" id="male" name="gender" value="true">
+						<label for="male">Male</label><br>
+						<input type="radio" id="female" name="gender" value="false">
+						<label for="female">Female</label><br>
+					</div>
+
+
+
+					<button type="submit" class="btn btn-primary btn-block">Submit</button>
+				</form>
+
+        </section>
+    </div>
+
+</body>
+
+</html>

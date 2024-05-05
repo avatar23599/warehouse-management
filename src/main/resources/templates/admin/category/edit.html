@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Suplier', ~{this :: div})}">
+
+<head>
+	<title>Supier</title>
+</head>
+
+<body>
+	<div class="content-wrapper">
+		<section class="content">
+          <div class="card-header">
+            <h3 class="card-title">Form Edit</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form method="post" th:action="@{/admin/category/edit}" enctype="multipart/form-data">
+            <div class="card-body">
+              <div class="form-group">
+                <label>Name Category</label>
+                <input type="text" class="form-control"  th:field="${category_last.name}">
+              </div>
+			 
+			 <div class="form-group" >
+                        <label>Parent</label>
+                        <select class="form-control" th:field="${category_last.category.id}">
+                            <option th:each="category: ${categories}" th:value="${category.category.id}" th:text="${category.name}"></option>
+                        </select>
+             </div>
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <input type="hidden" class="form-control"  th:field="${category_last.id}">
+            </div>
+          </form>
+		</section>
+	</div>
+</html>

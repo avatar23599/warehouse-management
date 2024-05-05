@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layoutadmin :: content('Product', ~{this :: div})}">
+
+<head>
+	<title>Product</title>
+	 <script th:src="@{/assets/admin/js/jquery-3.7.1.min.js}"></script>
+  	 <script>
+			$(document).ready(function() {
+				$('#quantity').keyup( function(){
+					var quantity = $('#quantity').val();
+					alert(quantity);
+					$.ajax({
+						type: 'GET',
+						data:{
+							quantity: quantity
+						},
+						url: 'admin/ajax/calculate',
+						success: function(quantity) {
+							$('#order_price').html(quantity);
+						}
+					});
+				});
+				
+				
+			});
+			
+		</script>
+</head>
+
+<body>
+	
+	<div class="content-wrapper">
+		<section class="content">
+          <div class="card-header">
+            <h3 class="card-title">Form Create Input</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form method="post" th:action="@{/admin/order/order_import}" enctype="multipart/form-data">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Name Product</label>
+                <input type="text" class="form-control"  th:field="${product.name}"  disabled>
+                <input type="hidden" class="form-control" id="exampleInputEmail1" >
+              </div>
+              <div class="form-group">
+                <label for="exampleInputFile">Quantity</label>
+                <input type="text" class="form-control" id="quantity" placeholder="Quantity">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputFile">Price <span th:text="${product.price}"></span> $</label>
+                <span class="form-control"  id="order_price"></span>
+              </div>
+				  <div class="form-group">
+				    <label>Note</label>
+				    <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+				  </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+		</section>
+	</div>
+</html>

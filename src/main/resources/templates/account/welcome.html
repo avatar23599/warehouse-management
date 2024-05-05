@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<title>Welcome</title>
+	
+	</head>
+	<body>
+		<h3>Welcome <th:block th:text="${session.username}"></th:block></h3>
+		<h3>Welcome <th:block th:text="${username}"></th:block></h3>
+		<h3>Welcome <th:block sec:authentication="name"></th:block></h3>
+		<a th:href="@{/admin/account/logout}">Logout</a>
+		
+	</body>
+	
+</html>
